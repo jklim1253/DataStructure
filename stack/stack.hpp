@@ -112,3 +112,13 @@ public :
 };
 
 } // namespace jklim
+
+#ifdef STACK_EXPORTS
+#define DEMOAPI __declspec(dllexport)
+#else
+#define DEMOAPI __declspec(dllimport)
+#endif // STACK_EXPORTS
+
+void DEMOAPI stack_demo();
+void DEMOAPI stack_recursion();
+void DEMOAPI stack_plus();
