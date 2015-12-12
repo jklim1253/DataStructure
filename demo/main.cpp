@@ -8,6 +8,8 @@ int main() {
 	stack_recursion();
 
 	stack_plus();
+
+	stack_multiply();
 	
 	return 0;
 }

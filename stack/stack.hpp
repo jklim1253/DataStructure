@@ -122,3 +122,4 @@ public :
 void DEMOAPI stack_demo();
 void DEMOAPI stack_recursion();
 void DEMOAPI stack_plus();
+void DEMOAPI stack_multiply();

@@ -116,27 +116,46 @@ std::string multiply(const std::string& lhs, const std::string& rhs) {
 	stack<int> depot;
 	std::string::const_reverse_iterator lit = lhs.crbegin(), rit = rhs.crbegin();
 
-	int tmp = 0;
-	int upper = 0;
-	while (rit != rhs.crend() || upper != 0) {
-		stack<int>* depot = new stack<int>;
+	std::string result("0");
+	int place = 0;
+	while (rit != rhs.crend()) {
+		stack<int> depot;
+		for (int i = 0; i < place; ++i) {
+			depot.push(0);
+		}
+
+		int tmp = 0;
+		int upper = 0;
+		lit = lhs.crbegin();
 		while (lit != lhs.crend() || upper != 0) {
 			tmp = upper;
 			if (lit != lhs.crend()) {
 				tmp += char2int(*rit) * char2int(*lit);
+				++lit;
 			}
-			depot->push(tmp % 10);
+			depot.push(tmp % 10);
 			upper = tmp / 10;
 		}
+
+		std::string stage;
+		while (!depot.empty()) {
+			stage.push_back(int2char(depot.pop()));
+		}
+
+		result = plus(result, stage);
+
+		++rit;
+
+		++place;
 	}
 
-
+	return result;
 }
 void stack_multiply() {
 	std::string lho, rho;
 	std::cout << "====================\n";
 	std::cout << "Enter 2 Number :>";
 	std::cin >> lho >> rho;
-	std::cout << lho << " + " << rho << " = " << multiply(lho, rho) << std::endl;
+	std::cout << lho << " * " << rho << " = " << multiply(lho, rho) << std::endl;
 	std::cout << "====================\n";
 }
