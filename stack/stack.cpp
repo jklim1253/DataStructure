@@ -73,6 +73,12 @@ void stack_recursion() {
 }
 
 #include <algorithm>
+inline int char2int(const char& c) {
+	return (c - '0');
+}
+inline char int2char(const int& i) {
+	return (i + '0');
+}
 std::string plus(const std::string& lhs, const std::string& rhs) {
 	stack<int> depot;
 	std::string::const_reverse_iterator lit = lhs.crbegin(), rit = rhs.crbegin();
@@ -81,11 +87,11 @@ std::string plus(const std::string& lhs, const std::string& rhs) {
 	while (lit != lhs.crend() || rit != rhs.crend() || upper != 0) {
 		tmp = upper;
 		if (lit != lhs.crend()) {
-			tmp += *lit - '0';
+			tmp += char2int(*lit);
 			++lit;
 		}
 		if (rit != rhs.crend()) {
-			tmp += *rit - '0';
+			tmp += char2int(*rit);
 			++rit;
 		}
 		depot.push(tmp%10);
@@ -94,7 +100,7 @@ std::string plus(const std::string& lhs, const std::string& rhs) {
 
 	std::string result;
 	while (!depot.empty()) {
-		result.push_back(depot.pop() + '0');
+		result.push_back(int2char(depot.pop()));
 	}
 	return result;
 }
@@ -104,5 +110,33 @@ void stack_plus() {
 	std::cout << "Enter 2 Number :>";
 	std::cin >> lho >> rho;
 	std::cout << lho << " + " << rho << " = " << plus(lho, rho) << std::endl;
+	std::cout << "====================\n";
+}
+std::string multiply(const std::string& lhs, const std::string& rhs) {
+	stack<int> depot;
+	std::string::const_reverse_iterator lit = lhs.crbegin(), rit = rhs.crbegin();
+
+	int tmp = 0;
+	int upper = 0;
+	while (rit != rhs.crend() || upper != 0) {
+		stack<int>* depot = new stack<int>;
+		while (lit != lhs.crend() || upper != 0) {
+			tmp = upper;
+			if (lit != lhs.crend()) {
+				tmp += char2int(*rit) * char2int(*lit);
+			}
+			depot->push(tmp % 10);
+			upper = tmp / 10;
+		}
+	}
+
+
+}
+void stack_multiply() {
+	std::string lho, rho;
+	std::cout << "====================\n";
+	std::cout << "Enter 2 Number :>";
+	std::cin >> lho >> rho;
+	std::cout << lho << " + " << rho << " = " << multiply(lho, rho) << std::endl;
 	std::cout << "====================\n";
 }
