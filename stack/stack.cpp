@@ -14,6 +14,11 @@ void operator delete (void* p) noexcept {
 	::free(p);
 }
 
+Version GetVersionStack()
+{
+	return Version() = {0, 1};
+}
+
 void stack_demo() {
 
 	std::string command;

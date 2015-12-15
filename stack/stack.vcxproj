@@ -95,7 +95,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(TargetPath) $(SolutionDir)lib
+      <Command>IF exist $(SolutionDir)lib (echo "lib directory exist") ELSE (mkdir $(SolutionDir)lib)
+copy /y $(TargetPath) $(SolutionDir)lib
 copy /y $(OutputPath)$(ProjectName).lib $(SolutionDir)lib</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
