@@ -15,3 +15,5 @@ example using stack.
 - multiply algebra
 
 ## queue
+
+## binary tree
